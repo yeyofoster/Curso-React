@@ -1,8 +1,11 @@
-export const FirstApp = () => {
+export const FirstApp = ({
+    title = 'Titulo por default',
+    subTitle = 'Soy un subtitulo'
+}) => {
     return (
         <>
-            <h1>First App</h1>
-            <p>Soy un subtitulo</p>
+            <h1>{title}</h1>
+            <p>{subTitle}</p>
         </>
-    )
+    );
 };
