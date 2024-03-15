@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { CounterApp } from "../src/CounterApp";
 
 describe('Pruebas en el <CounterApp />', () => {
@@ -20,5 +20,35 @@ describe('Pruebas en el <CounterApp />', () => {
         expect(screen.getByRole('heading', { level: 2 })
             .innerHTML
         ).toContain(`${initialValue}`);
+    });
+
+    test('Debe de incrementar con el botón +1', () => {
+        render(
+            <CounterApp value={initialValue} />
+        );
+        fireEvent.click(screen.getByText('+1'));
+
+        expect(screen.getByText(`${initialValue + 1}`)).toBeTruthy();
+    });
+
+    test('Debe de disminuir con el botón -1', () => {
+        render(
+            <CounterApp value={initialValue} />
+        );
+        fireEvent.click(screen.getByText('-1'));
+
+        expect(screen.getByText(`${initialValue - 1}`)).toBeTruthy();
+    });
+
+    test('Debe de funcionar el botón reset', () => {
+        render(
+            <CounterApp value={initialValue} />
+        );
+        fireEvent.click(screen.getByText('+1'));
+        fireEvent.click(screen.getByText('+1'));
+        fireEvent.click(screen.getByText('+1'));
+        fireEvent.click(screen.getByRole('button', { name: 'btn-reset' }));
+
+        expect(screen.getByText(`${initialValue}`)).toBeTruthy();
     });
 });
