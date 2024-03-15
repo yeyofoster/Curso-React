@@ -11,7 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.23.3",
     "isomorphic-fetch": "^3.0.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -20,7 +22,7 @@
     "@babel/core": "^7.24.0",
     "@babel/preset-env": "^7.24.0",
     "@testing-library/react": "^14.2.1",
-    "@types/jest": "29.5.12",
+    "@types/jest": "^29.5.12",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "@vitejs/plugin-react": "^4.2.1",
