@@ -6,13 +6,26 @@ describe('Pruebas en <AddCategory />', () => {
         console.log(newCategory);
     };
 
+    const inputValue = 'SpongeBob';
+
     test('Debe de cambiar el valor de la caja de texto', () => {
-        const newValue = 'SpongeBob';
         render(<AddCategory onNewCategory={onNewCategory} />);
         const input = screen.getByRole('textbox');
 
-        fireEvent.input(input, { target: { value: newValue } });
+        fireEvent.input(input, { target: { value: inputValue } });
 
-        expect(input.value).toBe(newValue);
+        expect(input.value).toBe(inputValue);
+    });
+
+    test('Debe de llamar onNewCategory si el input tiene un valor', () => {
+        render(<AddCategory onNewCategory={onNewCategory} />);
+
+        const input = screen.getByRole('textbox');
+        const form = screen.getByRole('form');
+
+        fireEvent.input(input, { target: { value: inputValue } });
+        fireEvent.submit(form);
+
+        expect(input.value).toBe('');
     });
 });
