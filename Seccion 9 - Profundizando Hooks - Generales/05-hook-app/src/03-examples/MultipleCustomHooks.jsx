@@ -1,19 +1,32 @@
-import { useFetch } from "../hooks";
+import { useCounter, useFetch } from "../hooks";
+import { LoadingMessage } from "./LoadingMessage";
+import { PokemonCard } from "./PokemonCard";
 
 export const MultipleCustomHooks = () => {
-    const url = 'https://pokeapi.co/api/v2/pokemon/1';
 
-    const { data, hasError, isLoading } = useFetch(url);
+    const { counter, increment, decrement } = useCounter(1, 1);
+    const { data, hasError, isLoading } = useFetch(`https://pokeapi.co/api/v2/pokemon/${counter}`);
 
     return (
         <>
             <h1>Información de Pokemon</h1>
             <hr />
             {isLoading ?
-                <h3>Cargando...</h3> :
-                <h3>{data?.name}</h3>
+                <LoadingMessage /> :
+                <PokemonCard
+                    id={data.id}
+                    name={data.name}
+                    sprites={[
+                        data.sprites.front_default,
+                        data.sprites.front_shiny,
+                        data.sprites.back_default,
+                        data.sprites.back_shiny
+                    ]}
+                />
             }
-
+            <hr />
+            <button onClick={() => decrement()} className="btn btn-primary">Anteriores</button>
+            <button onClick={() => increment()} className="btn btn-primary">Siguiente</button>
         </>
     );
 };
