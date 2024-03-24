@@ -17,12 +17,19 @@ export const TodoApp = () => {
     }, [todos]);
 
     const handleNewTodo = (todo) => {
-        console.log({ todo });
         const action = {
             type: '[TODO] Add Todo',
             payload: todo
         };
 
+        dispatch(action);
+    };
+
+    const handleDeleteTodo = (id) => {
+        const action = {
+            type: '[TODO] Remove Todo',
+            payload: id
+        };
         dispatch(action);
     };
 
@@ -33,12 +40,17 @@ export const TodoApp = () => {
 
             <div className="row">
                 <div className="col-7">
-                    <TodoList todos={todos} />
+                    <TodoList
+                        todos={todos}
+                        onDeleteTodo={handleDeleteTodo}
+                    />
                 </div>
                 <div className="col-5">
                     <h4>Agregar TODO</h4>
                     <hr />
-                    <TodoAdd onNewTodo={handleNewTodo} />
+                    <TodoAdd
+                        onNewTodo={handleNewTodo}
+                    />
                 </div>
             </div>
         </>
