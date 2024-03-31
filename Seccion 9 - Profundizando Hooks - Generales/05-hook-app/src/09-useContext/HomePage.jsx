@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 
 export const HomePage = () => {
-    const { user, setUser } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     return (
         <>
             <h1>Home Page: {user?.name}</h1>
@@ -11,19 +11,6 @@ export const HomePage = () => {
             <pre aria-label="pre">
                 {JSON.stringify(user, null, 3)}
             </pre>
-
-            <button
-                className="btn btn-primary"
-                onClick={
-                    () => setUser({
-                        id: 123,
-                        name: 'Yeyo Foster',
-                        email: 'yeyo.foster@gmail.com'
-                    })
-                }
-            >
-                Establecer usuario
-            </button>
         </>
     );
 };
