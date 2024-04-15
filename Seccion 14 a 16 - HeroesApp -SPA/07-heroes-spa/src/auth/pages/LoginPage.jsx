@@ -1,10 +1,14 @@
+import { AuthContext } from '../context';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export const LoginPage = () => {
 
     const navigator = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const onLogin = () => {
+        login('Yeyo Foster');
         navigator('/', {
             replace: true
         });
